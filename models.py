@@ -7,10 +7,9 @@ from sqlalchemy.engine import create_engine
 # Create all the Tables
 
 class Tweets(db.Model):
-    __tablename__ = 'tweets'
+    __tablename__ = 'tweets2'
 
-    id = db.Column(db.Integer, primary_key=True)
-    twitter_id = db.Column(db.Integer)
+    id = db.Column(db.String(), primary_key=True,autoincrement=False)
     text = db.Column(db.String())
     dttm = db.Column(db.DateTime(timezone=True))
     isRetweet = db.Column(db.Boolean())
@@ -28,7 +27,7 @@ class Hashtags(db.Model):
     __tablename__ = 'hashtags'
 
     id = db.Column(db.Integer, primary_key=True)
-    tweet_id = db.Column(db.Integer, db.ForeignKey('tweets.id'))
+    tweet_id = db.Column(db.Integer, db.ForeignKey('tweets2.id'))
     tag = db.Column(db.String())
 
     def __init__(self, tweet_id, tag):
@@ -42,7 +41,7 @@ class Atuser(db.Model):
     __tablename__ = 'atuser'
 
     id = db.Column(db.Integer, primary_key=True)
-    tweet_id = db.Column(db.Integer, db.ForeignKey('tweets.id'))
+    tweet_id = db.Column(db.Integer, db.ForeignKey('tweets2.id'))
     screen_name = db.Column(db.String())
 
     def __init__(self, tweet_id, screen_name):
